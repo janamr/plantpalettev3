@@ -34,8 +34,8 @@
 
 
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-      <h3 class="display-4">Top plants for this location</h3>
-      <p class="lead">Filters</p>
+      <h3 class="display-5">Your recommended plant palette:</h3>
+
 </div>
 
 <!-- Card deck -->
@@ -46,7 +46,7 @@
 
     <!--Card image-->
     <div class="view overlay">
-      <div class="card-img-top" style="background-image: url({{this.pictureUrl}})"></div>
+      <div class="card-img-top" style="background-image: url(https://kensnursery.com/wp-content/uploads/PAN-DUB-4.jpg)"></div>
       <a href="/plants/{{this._id}}">
         <div class="mask rgba-white-slight"></div>
       </a>
@@ -63,9 +63,9 @@
 
       <p class="card-text">{{#each this.plantType}}<p><em>{{this}}</em></p>{{/each}}
       <a href="/plants/{{this._id}}">see details</a></p>
-      	<a href="/plants/{{this._id}}/save" class="btn btn-lg btn-outline-primary"> <i class="fas fa-shopping-cart"></i> Add to project </a>
+      	{{!-- <a href="/plants/{{this._id}}/save" class="btn btn-lg btn-outline-primary"> <i class="fas fa-shopping-cart"></i> Add to project </a> --}}
       <!-- Provides extra visual weight and identifies the primary action in a set of buttons -->
-      <button type="button" class="btn btn-light-blue btn-md"><a href="/plants/{{this._id}}">More info</a></button>
+      <a class="btn btn-primary btn-md" href="/plants/{{this._id}}">More info</a>
     </div>
   </div>
   <!-- Card -->

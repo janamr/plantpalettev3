@@ -122,7 +122,7 @@ html {
   cursor: zoom-in;
 }
 
-/* ----------------------------------FOR COVER PAGE-----------------------------  */
+/* ----------------------------------FOR LAYOUT PAGE-----------------------------  */
 
 
 
@@ -139,5 +139,9 @@ html {
 }
 
 .bg-dark.my-nav {
-  background-color: green!important;
+  background-color: #493540!important;
+}
+
+.btn-primary {
+  background-color: #493540!important;
 }
