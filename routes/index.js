@@ -4,6 +4,7 @@ const Plant = require("../models/plant-model.js");
 
 /* GET home page */
 router.get('/', (req, res, next) => {
+  res.locals.layout = false;
   res.render('index.hbs');
 });
 

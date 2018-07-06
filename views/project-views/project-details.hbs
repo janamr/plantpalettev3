@@ -17,13 +17,17 @@
       <p>{{project.location}}</p>
 </div>
 
-      <main role="main" class="inner cover">
+<main role="main" class="inner cover">
           <a href="/plants" class="btn btn-med btn-primary">Add Plants</a>
           <a href="/center" class="btn btn-med btn-primary">Return to projects</a>
       </main>
 
         {{!-- <p style="color:brown">Plants:</p> --}}
 <div class="card-deck">
+
+
+
+
 {{#each project.plantArray}}
   <!-- Card -->
   <div class="card mb-4">
@@ -34,6 +38,7 @@
       <a href="/plants/{{this}}">
         <div class="mask rgba-white-slight"></div>
       </a>
+
     </div>
 
     <!--Card content-->

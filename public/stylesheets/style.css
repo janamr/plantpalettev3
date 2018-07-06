@@ -28,8 +28,14 @@ html {
   max-width: 700px;
 }
 
+.card-deck {
+  width: 80%;
+  margin: 0 auto;
+}
+
 .card-deck .card {
-  min-width: 220px;
+  min-width: 22%;
+  flex-grow: 0;
 }
 
 .border-top { border-top: 1px solid #e5e5e5; }
@@ -48,6 +54,7 @@ html {
   background-size: cover;
   background-position: center;
 }
+
 
 /* .trial{
   display: flex;
@@ -116,3 +123,21 @@ html {
 }
 
 /* ----------------------------------FOR COVER PAGE-----------------------------  */
+
+
+
+.navbar {
+  justify-content: space-between;
+}
+
+.form-control.search-input {
+  width: 240px;
+}
+
+.navbar-collapse {
+  flex-grow: 0;
+}
+
+.bg-dark.my-nav {
+  background-color: green!important;
+}
