@@ -14,10 +14,16 @@ const userSchema = new Schema({
         default:"normal"
     },
     encryptedPassword: { type: String},
+    goodleID: { type: String},
 
 },{
     timestamps: true
 });
+
+//加入一个virtual propoer来识别admin
+userSchema.virtual("isAdmin").get(function() {
+    return this.role === "admin";
+})
 
 
 const User = mongoose.model("User", userSchema);

@@ -7,6 +7,7 @@ const Project = require("../models/project-model.js");
 projectRoutes.get("/center", (req, res, next) => {
 
   if(!req.user){
+    req.flash('error','Please log in first');
     res.redirect("/login");
   } else {
     const userID = req.user._id;
@@ -23,6 +24,7 @@ projectRoutes.get("/center", (req, res, next) => {
 
 projectRoutes.get("/project/create", (req, res, next) => {
   if(!req.user){
+    req.flash('error','Please log in first');
     res.redirect("/login");
   } else {
     res.render("project-views/create-project.hbs");
@@ -37,7 +39,7 @@ projectRoutes.post("/process-creation", (req, res, next) => {
 
   // name and location of the project cannot be empty
   if(projectName ==="" || location ===""){
-    // message: name and location cannot be empty
+    req.flash('error','Fields with * cannot be empty!');
     res.redirect("/project/create")
   } else {
 

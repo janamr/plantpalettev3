@@ -15,6 +15,7 @@ router.get("/search", (req, res, next) => {
     const regex = new RegExp(escapeRegex(req.query.search), 'gi');
 
     Plant.find( {$or:[{commonName:regex},{location:regex},{plantType: regex},{bloomPeriod: regex}]} )
+    .limit(10)
     .then(plants => {
         res.render("plant-views/plants.hbs", {plants})
     })
@@ -23,6 +24,8 @@ router.get("/search", (req, res, next) => {
 })
 
 
+
+// <-------------- DEMO LIST ----------------------
 
 function escapeRegex(text) {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");

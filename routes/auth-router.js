@@ -20,7 +20,7 @@ authRoutes.post("/process-signup", (req, res, next) => {
 
 
     if(req.body.password === ""){
-        // message: please enter a valid password!
+        req.flash("error", "Please enter a valid password!");
         res.redirect("/signup");
         return
     } else {
@@ -30,7 +30,7 @@ authRoutes.post("/process-signup", (req, res, next) => {
     User.create({ userName, email, profession, encryptedPassword})
     .then((users) => {
         console.log("data saved to DB!");
-        // message: success! you have signup, please log in.
+        req.flash("sucess", "You have logged in!");
         res.redirect("/");
     })
     .catch((err) => {
@@ -53,18 +53,18 @@ authRoutes.post("/process-login", (req, res, next) => {
     User.findOne({email})
     .then((user) => {
         if (!user){
-            // message: please enter a valid email!
+            req.flash("error", "Please enter a valid email address!");
             res.redirect("/login");}
         else {
             const {encryptedPassword} = user;
 
             if (!bcrypt.compareSync(password, encryptedPassword)){
-                // message: error, incorrect password
+                req.flash("error", "Password doesn't match, please re-enter!");
                 res.redirect("/login");
                 return;
             } else {
                 req.login(user, () => {
-                    // message: you have logged in successfully!
+                    req.flash("sucess", "You have logged in successfully!");
                     console.log("=================");
                     console.log("You have logged in!")
                     res.redirect("/center")
@@ -79,7 +79,7 @@ authRoutes.post("/process-login", (req, res, next) => {
 authRoutes.get("/logout", (req, res, next) => {
     req.logout();
     console.log("You have logged out!");
-    // message: You have logged out successfully!
+    req.flash("sucess", "You have logged out successfully!");
     res.redirect("/");
 })
 
@@ -87,21 +87,25 @@ authRoutes.get("/logout", (req, res, next) => {
 
 // <------------------ SETTING ------------------->
 authRoutes.get("/settings", (req, res, next) => {
-    // check if user is logged in
+    if(!req.user){
+        req.flash('error','Please log in');
+        res.redirect("/login");
+      } else {
     res.render("auth-views/settings.hbs")
+      }
 })
 
 authRoutes.post("/change-username", (req, res, next) =>{
-    const {newName} = req.body;
+    const newName = req.body.userName;
     const userID = req.user._id;
 
     User.findById(userID, function (err, user) {
         if (err) next(err);
 
-        user._id = newName;
+        user.userName = newName;
         user.save(function (err, updatedUser) {
           if (err) next(err);
-          // message: user name updated!
+          req.flash('sucess','User name is updated!');
           console.log("User name update successfully!!");
           res.redirect("/center")
         });
@@ -109,12 +113,12 @@ authRoutes.post("/change-username", (req, res, next) =>{
 })
 
 authRoutes.post("/change-password", (req, res, next) => {
-    const {newPassword} = req.body;
+    const newPassword = req.body.password;
     const newEncryptedPass = bcrypt.hashSync(newPassword, 10)
     const oldPassword = req.user.encryptedPassword;
     const userID = req.user._id;
 
-    res.send(newPassword);
+    //res.send(oldPassword);
 
     // if new and old password match
   if(!bcrypt.compareSync(oldPassword, newEncryptedPass)){
@@ -125,9 +129,7 @@ authRoutes.post("/change-password", (req, res, next) => {
         user.encryptedPassword  = newEncryptedPass;
         user.save(function (err, updatedUser) {
           if (err) next(err);
-          // message: user password updated!
-          res.send(updatedUser);
-          console.log("User password update successfully!!");
+          req.flash('sucess','Password is updated!');
           res.redirect("/")
         });
       });
@@ -135,6 +137,25 @@ authRoutes.post("/change-password", (req, res, next) => {
         res.redirect("/settings")
     }
 })
+
+// <---------------------- OAuth Authentification ---------------------------->
+
+// Allow Google log in here
+authRoutes.get("/google/login",
+    passport.authenticate("google", {
+        scope: [
+            "https://www.googleapis.com/auth/plus.login",
+            "https://www.googleapis.com/auth/plus.profile.emails.read"
+          ]
+    }));
+
+authRoutes.get("/google/success", passport.authenticate("google", {
+    successRedirect: "/",
+    failureRedirect: "/login",
+    successFlash: "Google log in success!",
+    failureFlash: "Google log in failure!."
+}) );
+
 
 
 // <------------- Export AuthRoutes -----------------
