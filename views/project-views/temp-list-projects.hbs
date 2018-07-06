@@ -1,19 +1,21 @@
-<h4>Select a project to save</h4>
+<h4>Save to project: </h4>
+
+
+<img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
 
 <ul>
     {{#each projects}}
         <form method="POST" action="/plants/save/{{this._id}}">
             <label>
-                <nav>{{this.projectName}}</nav>
-                <button>save</button>
+                {{!-- <nav>{{this.projectName}}</nav> --}}
+                <button type="button" class="btn btn-med btn-primary" href="{{this.projectName}}">{{this.projectName}}</button>
+                {{!-- <button>save</button> --}}
                 <a href="/project/{{this._id}}">view more</a>
             </label>
-
             <input type="hidden" value="{{../plantID}}" name="plantID">
         </form>
-
-
-    </nav>
     {{/each}}
 
 </ul>
+
+<body class="text-center">

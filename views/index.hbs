@@ -1,18 +1,11 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+{{!-- <h1>{{title}}</h1>
+<p>Welcome to {{title}}</p> --}}
 
     <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="stylesheets/cover.css" rel="stylesheet">
 
-
-<form method="GET" action="/search">
-    <input type="text" name="search" placeholder="start your search..." >
-    <button type="submit">Search</button>
-</form>
-
-<br />
 
 {{!-- <a href="/plants">See all plants</a> --}}
 
@@ -21,32 +14,26 @@
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
       <header class="masthead mb-auto">
         <div class="inner">
-          <h3 class="masthead-brand">Cover</h3>
           <nav class="nav nav-masthead justify-content-center">
-            <a class="nav-link active" href="#">Home</a>
-            <a class="nav-link" href="#">Features</a>
-            <a class="nav-link" href="#">Contact</a>
+            <a class="nav-link active" href="/center">Home</a>
+            <a class="nav-link" href="/login">Log in</a>
+            <a class="nav-link" href="/signup">Sign up</a>
           </nav>
         </div>
       </header>
 
-      <main role="main" class="inner cover">
+      <h3 class="masthead-brand">sitepalette</h3>
+
+<form method="GET" action="/search">
+    <input type="text" name="search" class="form-control mr-sm-2" placeholder="start your search..." >
+    <button type="submit" class="btn btn-med btn-primary">Search</button>
+          {{!-- <main role="main" class="inner cover">
           <a href="/plants" class="btn btn-lg btn-secondary">See all Plants</a>
-      </main>
+      </main> --}}
+</form>
+
+
 
     </div>
 
-    <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-      <header class="masthead mb-auto">
-        <div class="inner">
-          <h3 class="masthead-brand">Cover</h3>
-          <nav class="nav nav-masthead justify-content-center">
-            <a class="nav-link active" href="#">Home</a>
-            <a class="nav-link" href="#">Features</a>
-            <a class="nav-link" href="#">Contact</a>
-          </nav>
-        </div>
-      </header>
-
-    </div>
   </body>
