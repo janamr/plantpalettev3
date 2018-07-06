@@ -3,6 +3,10 @@ const User = require("../models/user-model.js");
 const flash = require("connect-flash");
 
 
+// GOOGLE LOG IN
+require("./google-strategy.js");
+
+
 passport.serializeUser((userDoc, done) => {
     console.log("SERIALIZE (save to session)");
     done(null, userDoc._id)

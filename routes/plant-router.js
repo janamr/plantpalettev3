@@ -9,7 +9,7 @@ const mongoose = require("mongoose");
 // <---------- LISTS OF PLANTS -------------------------
 plantRoutes.get("/plants", (req, res, next) => {
     Plant.find().sort({_id: -1})
-    .limit(40)
+    .limit(25)
     .then(plants => {
         //console.log(plants)
         res.render("plant-views/plants.hbs", {plants})
@@ -35,7 +35,7 @@ plantRoutes.get("/plants/:id", (req, res, next) => {
 plantRoutes.get("/plants/:id/save", (req, res, next) => {
 
     if(!req.user){
-        // message: please log in to add this plant to your project
+        req.flash('error','Please log in first');
         res.redirect("/login")
     } else {
         const userID = req.user._id;
@@ -60,13 +60,10 @@ plantRoutes.post("/plants/save/:projectID", (req, res, next) => {
         {new: true}
         )
         .then(
-            // message plants saved to project
+            //req.flash('sucess','plant is saved to project!');
             res.redirect(`/project/${projectID}`)
-
         )
-
         .catch((err) => next(err))
-
 })
 
 

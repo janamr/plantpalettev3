@@ -1,3 +1,11 @@
+[class$="-message"] {
+  border: 1px dashed grey;
+  color: red;
+  padding: 10px;
+  color:grey;
+}
+
+
 body {
   background-color: white;
   padding-top: 5rem;
